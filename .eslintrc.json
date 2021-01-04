@@ -60,5 +60,6 @@
         "@func-names": "off"
       }
     }
-  ]
+  ],
+  "ignorePatterns": ["node_modules/"]
 }
