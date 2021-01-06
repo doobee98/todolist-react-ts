@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ColorPalette from '../common/ColorPalette';
 
 type WindowWrapperProps = {
   children: React.ReactNode;
@@ -12,15 +13,14 @@ const WindowWrapperBlock = styled.div`
 
   width: 100vmax;
   height: 100vmin;
-  background: #e9ecef;
+  background: ${ColorPalette.SKYBLUE};
 
   & * {
     box-sizing: border-box;
   }
 `;
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function WindowWrapper({ children }: WindowWrapperProps) {
+function WindowWrapper({ children }: WindowWrapperProps): JSX.Element {
   return <WindowWrapperBlock>{children}</WindowWrapperBlock>;
 }
 

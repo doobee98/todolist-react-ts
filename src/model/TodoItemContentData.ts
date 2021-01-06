@@ -1,6 +1,9 @@
-interface TodoItemContentData {}
+/*
+  NOT USED
+*/
+interface TodoItemContentData {};
 
-export interface NoneTodoItemContentData {}
+export interface NoneTodoItemContentData {};
 
 export interface TextTodoItemContentData {
   text: string;

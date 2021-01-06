@@ -1,29 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useObserver } from 'mobx-react';
 import TodoItem from './TodoItem';
-import TodoListData from '../model/TodoListData';
+import useStore from '../stores/useStore';
 
-type TodoListProps = {
-  data: TodoListData;
-};
+const { todolist } = useStore();
 
 const TodoListBlock = styled.div`
   flex: 1;
-  padding: 20px 32px;
+  padding: 20px 0px;
   padding-bottom: 48px;
   overflow-y: auto;
-  border: 1px solid blue;
 `;
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function TodoList({ data }: TodoListProps) {
-  return (
+function TodoList(): JSX.Element {
+  return useObserver(() => (
     <TodoListBlock>
-      {data.items.map(itemData => (
-        <TodoItem key={itemData.id} data={itemData} />
+      {todolist.model.items.map(item => (
+        <TodoItem key={item.id} data={item} />
       ))}
     </TodoListBlock>
-  );
+  ));
 }
 
 export default TodoList;

@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { MdAdd } from 'react-icons/md';
-// import TodoItem from './TodoItem';
-import TodoListData from '../model/TodoListData';
-import TodoItemData from '../model/TodoItemData';
+import useStore from '../stores/useStore';
 
-type TodoAddButtonProps = {
-  data: TodoListData;
-};
+const { todolist } = useStore();
 
 const TodoAddButtonBlock = styled.div`
   display: flex;
@@ -20,16 +16,12 @@ const TodoAddButtonBlock = styled.div`
   /* TODO: MdAdd 사이즈 조절하는 다른 방법은 없는지? */
 `;
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function TodoList({ data }: TodoAddButtonProps) {
-  const onClick = () => {
-    data.items.unshift(TodoItemData.createDefault());
-  };
+function TodoAddButton(): JSX.Element {
   return (
     <TodoAddButtonBlock>
-      <MdAdd size="40px" onClick={onClick} />
+      <MdAdd size="40px" onClick={() => todolist.addDefaultItem()} />
     </TodoAddButtonBlock>
   );
 }
 
-export default TodoList;
+export default TodoAddButton;

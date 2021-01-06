@@ -1,13 +1,15 @@
-import TodoItemContentData from './TodoItemContentData';
+/* eslint-disable lines-between-class-members */
 
 class TodoItemData {
   private static counter = 0;
 
   public readonly id: number;
+  public title: string;
+  public done: boolean;
 
-  // content: TodoItemContent;
-
-  constructor(public title: string, public done: boolean) {
+  constructor(_title: string, _done: boolean) {
+    this.title = _title;
+    this.done = _done;
     this.id = TodoItemData.counter;
     TodoItemData.counter += 1;
   }

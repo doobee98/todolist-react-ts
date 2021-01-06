@@ -3,26 +3,20 @@ import WindowWrapper from './components/WindowWrapper';
 import TodoTemplate from './components/TodoTemplate';
 import TodoHead from './components/TodoHead';
 import TodoList from './components/TodoList';
-import TodoListData from './model/TodoListData';
 import TodoItemData from './model/TodoItemData';
+import useStore from './stores/useStore';
 
-const todolistdata: TodoListData = {
-  items: [
-    new TodoItemData('안녕하세요', true),
-    new TodoItemData('이두섭입니다', false),
-    new TodoItemData('투두리스트 테스트', true),
-  ],
-};
+const { todolist } = useStore();
+todolist.addItem(new TodoItemData('TodoList Mobx로 만들기', true));
+todolist.addItem(new TodoItemData('랩 미팅 준비', false));
+todolist.addItem(new TodoItemData('토요일 약속 장소 예약하기', false));
 
-todolistdata.items.unshift(TodoItemData.createDefault());
-
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function App() {
+function App(): JSX.Element {
   return (
     <WindowWrapper>
       <TodoTemplate>
-        <TodoHead data={todolistdata} />
-        <TodoList data={todolistdata} />
+        <TodoHead />
+        <TodoList />
       </TodoTemplate>
     </WindowWrapper>
   );

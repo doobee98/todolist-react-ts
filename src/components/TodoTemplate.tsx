@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ColorPalette from '../common/ColorPalette';
 
 type TodoTemplateProps = {
   children: React.ReactNode;
@@ -17,11 +18,10 @@ const TodoTemplateBlock = styled.div`
   padding-bottom: 40px;
   border-radius: 20px;
   overflow-y: auto;
-  background: white;
+  background: ${ColorPalette.WHITE};
 `;
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function TodoTemplate({ children }: TodoTemplateProps) {
+function TodoTemplate({ children }: TodoTemplateProps): JSX.Element {
   return <TodoTemplateBlock>{children}</TodoTemplateBlock>;
 }
 
