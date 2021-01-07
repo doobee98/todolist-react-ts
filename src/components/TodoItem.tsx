@@ -45,7 +45,7 @@ const CheckBox = styled.div`
   font-size: 20px;
 `;
 
-const Title = styled.input`
+const Title = styled.input<{ checked: boolean }>`
   margin-left: 15px;
   flex: 1;
   font-size: 15px;
@@ -56,6 +56,12 @@ const Title = styled.input`
   &:read-only {
     border-color: transparent;
   }
+
+  ${props =>
+    props.checked &&
+    css`
+      text-decoration: line-through;
+    `}
 `;
 
 const RemoveButton = styled.div`
@@ -105,6 +111,7 @@ function TodoItem({ data }: TodoItemProps): JSX.Element {
         <Title
           ref={refTitle}
           value={data.title}
+          checked={data.done}
           readOnly={!editMode}
           onClick={clickTitle}
           onChange={setTitle}
