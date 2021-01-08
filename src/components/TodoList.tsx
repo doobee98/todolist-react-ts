@@ -4,7 +4,7 @@ import { useObserver } from 'mobx-react';
 import TodoItem from './TodoItem';
 import useStore from '../stores/useStore';
 
-const TodoListBlock = styled.div`
+const TodoListWrapper = styled.div`
   flex: 1;
   padding: 20px 0px;
   padding-bottom: 48px;
@@ -15,11 +15,11 @@ const TodoList: React.FC = () => {
   const { todolist } = useStore();
 
   return useObserver(() => (
-    <TodoListBlock>
+    <TodoListWrapper>
       {todolist.model.items.map(item => (
         <TodoItem key={item.id} data={item} />
       ))}
-    </TodoListBlock>
+    </TodoListWrapper>
   ));
 };
 

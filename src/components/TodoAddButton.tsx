@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { MdAdd } from 'react-icons/md';
 import useStore from '../stores/useStore';
 
-const TodoAddButtonBlock = styled.div`
+const TodoAddButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,9 +18,9 @@ const TodoAddButton: React.FC = () => {
   const { todolist } = useStore();
 
   return (
-    <TodoAddButtonBlock>
+    <TodoAddButtonWrapper>
       <MdAdd size="40px" onClick={() => todolist.addDefaultItem()} />
-    </TodoAddButtonBlock>
+    </TodoAddButtonWrapper>
   );
 };
 

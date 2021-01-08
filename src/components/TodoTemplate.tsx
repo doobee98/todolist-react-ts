@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ColorUtils from '../utils/ColorUtils';
 
-const TodoTemplateBlock = styled.div`
+const TodoTemplateWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: stretch;
@@ -24,7 +24,7 @@ interface TodoTemplateProps {
 const TodoTemplate: React.FC<TodoTemplateProps> = props => {
   const { children } = props;
 
-  return <TodoTemplateBlock>{children}</TodoTemplateBlock>;
+  return <TodoTemplateWrapper>{children}</TodoTemplateWrapper>;
 };
 
 export default TodoTemplate;

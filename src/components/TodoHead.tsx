@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ColorUtils from '../utils/ColorUtils';
 import TodoAddButton from './TodoAddButton';
 
-const TodoHeadBlock = styled.div`
+const TodoHeadWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,10 +14,10 @@ const TodoHeadBlock = styled.div`
 
 const TodoHead: React.FC = () => {
   return (
-    <TodoHeadBlock>
+    <TodoHeadWrapper>
       <h1>TodoList</h1>
       <TodoAddButton />
-    </TodoHeadBlock>
+    </TodoHeadWrapper>
   );
 };
 

@@ -7,7 +7,7 @@ import TodoItemData from '../model/TodoItemData';
 import useStore from '../stores/useStore';
 import useClickOutside from '../hooks/useClickOutside';
 
-const TodoItemBlock = styled.div<{ highlight: boolean }>`
+const TodoItemWrapper = styled.div<{ highlight: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -104,24 +104,22 @@ const TodoItem: React.FC<TodoItemProps> = props => {
   useClickOutside(refTitle, setEditOff);
 
   return useObserver(() => (
-    <>
-      <TodoItemBlock highlight={editMode}>
-        <CheckBox onClick={toggleDone}>
-          {data.done && <MdDone size="15px" />}
-        </CheckBox>
-        <Title
-          ref={refTitle}
-          value={data.title}
-          checked={data.done}
-          readOnly={!editMode}
-          onClick={clickTitle}
-          onChange={setTitle}
-        />
-        <RemoveButton>
-          <MdDelete onClick={removeThis} />
-        </RemoveButton>
-      </TodoItemBlock>
-    </>
+    <TodoItemWrapper highlight={editMode}>
+      <CheckBox onClick={toggleDone}>
+        {data.done && <MdDone size="15px" />}
+      </CheckBox>
+      <Title
+        ref={refTitle}
+        value={data.title}
+        checked={data.done}
+        readOnly={!editMode}
+        onClick={clickTitle}
+        onChange={setTitle}
+      />
+      <RemoveButton>
+        <MdDelete onClick={removeThis} />
+      </RemoveButton>
+    </TodoItemWrapper>
   ));
 };
 
