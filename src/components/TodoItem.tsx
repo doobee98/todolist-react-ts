@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useObserver } from 'mobx-react';
 import { MdDone, MdDelete } from 'react-icons/md';
-import ColorPalette from '../common/ColorPalette';
+import ColorUtils from '../utils/ColorUtils';
 import TodoItemData from '../model/TodoItemData';
 import useStore from '../stores/useStore';
 import useClickOutside from '../hooks/useClickOutside';
@@ -17,17 +17,17 @@ const TodoItemBlock = styled.div<{ highlight: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid ${ColorPalette.GREY};
+  border-bottom: 1px solid ${ColorUtils.GREY};
   padding: 20px 10px;
 
   &:nth-child(1) {
-    border-top: 1px solid ${ColorPalette.GREY};
+    border-top: 1px solid ${ColorUtils.GREY};
   }
 
   ${props =>
     props.highlight &&
     css`
-      background-color: ${ColorPalette.LIGHTGREY};
+      background-color: ${ColorUtils.LIGHTGREY};
     `}
 `;
 
@@ -38,9 +38,9 @@ const CheckBox = styled.div`
 
   width: 17px;
   height: 17px;
-  border: 1px solid ${ColorPalette.BLACK};
-  color: ${ColorPalette.BLACK};
-  background-color: ${ColorPalette.WHITE};
+  border: 1px solid ${ColorUtils.BLACK};
+  color: ${ColorUtils.BLACK};
+  background-color: ${ColorUtils.WHITE};
   cursor: pointer;
   font-size: 20px;
 `;
@@ -50,7 +50,7 @@ const Title = styled.input<{ checked: boolean }>`
   flex: 1;
   font-size: 15px;
   font-weight: bold;
-  color: ${ColorPalette.BLACK};
+  color: ${ColorUtils.BLACK};
   padding: 10px 8px;
 
   &:read-only {

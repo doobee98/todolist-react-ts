@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ColorPalette from '../common/ColorPalette';
+import ColorUtils from '../utils/ColorUtils';
 
 type WindowWrapperProps = {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ const WindowWrapperBlock = styled.div`
 
   width: 100vmax;
   height: 100vmin;
-  background: ${ColorPalette.SKYBLUE};
+  background: ${ColorUtils.SKYBLUE};
 
   & * {
     box-sizing: border-box;
