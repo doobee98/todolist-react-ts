@@ -7,12 +7,6 @@ import TodoItemData from '../model/TodoItemData';
 import useStore from '../stores/useStore';
 import useClickOutside from '../hooks/useClickOutside';
 
-const { todolist } = useStore();
-
-type TodoItemProps = {
-  data: TodoItemData;
-};
-
 const TodoItemBlock = styled.div<{ highlight: boolean }>`
   display: flex;
   justify-content: center;
@@ -73,7 +67,14 @@ const RemoveButton = styled.div`
   cursor: pointer;
 `;
 
-function TodoItem({ data }: TodoItemProps): JSX.Element {
+interface TodoItemProps {
+  data: TodoItemData;
+}
+
+const TodoItem: React.FC<TodoItemProps> = props => {
+  const { data } = props;
+  const { todolist } = useStore();
+
   const refTitle = useRef<HTMLInputElement>(null);
   const [editMode, setEditMode] = useState(false);
   const setEditOn = () => setEditMode(true);
@@ -122,6 +123,6 @@ function TodoItem({ data }: TodoItemProps): JSX.Element {
       </TodoItemBlock>
     </>
   ));
-}
+};
 
 export default TodoItem;

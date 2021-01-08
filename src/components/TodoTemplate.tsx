@@ -2,10 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import ColorUtils from '../utils/ColorUtils';
 
-type TodoTemplateProps = {
-  children: React.ReactNode;
-};
-
 const TodoTemplateBlock = styled.div`
   display: flex;
   justify-content: center;
@@ -21,8 +17,14 @@ const TodoTemplateBlock = styled.div`
   background: ${ColorUtils.WHITE};
 `;
 
-function TodoTemplate({ children }: TodoTemplateProps): JSX.Element {
-  return <TodoTemplateBlock>{children}</TodoTemplateBlock>;
+interface TodoTemplateProps {
+  children: React.ReactNode;
 }
+
+const TodoTemplate: React.FC<TodoTemplateProps> = props => {
+  const { children } = props;
+
+  return <TodoTemplateBlock>{children}</TodoTemplateBlock>;
+};
 
 export default TodoTemplate;

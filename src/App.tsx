@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-function App(): JSX.Element {
+const App: React.FC = () => {
   const { todolist } = useStore();
   todolist.addItem(new TodoItemData('TodoList Mobx로 만들기', true));
   todolist.addItem(new TodoItemData('랩 미팅 준비', false));
@@ -36,6 +36,6 @@ function App(): JSX.Element {
       </Switch>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

@@ -4,8 +4,6 @@ import { useObserver } from 'mobx-react';
 import TodoItem from './TodoItem';
 import useStore from '../stores/useStore';
 
-const { todolist } = useStore();
-
 const TodoListBlock = styled.div`
   flex: 1;
   padding: 20px 0px;
@@ -13,7 +11,9 @@ const TodoListBlock = styled.div`
   overflow-y: auto;
 `;
 
-function TodoList(): JSX.Element {
+const TodoList: React.FC = () => {
+  const { todolist } = useStore();
+
   return useObserver(() => (
     <TodoListBlock>
       {todolist.model.items.map(item => (
@@ -21,6 +21,6 @@ function TodoList(): JSX.Element {
       ))}
     </TodoListBlock>
   ));
-}
+};
 
 export default TodoList;

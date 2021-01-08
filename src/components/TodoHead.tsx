@@ -12,13 +12,13 @@ const TodoHeadBlock = styled.div`
   border-bottom: ${ColorUtils.LIGHTGREY};
 `;
 
-function TodoHead(): JSX.Element {
+const TodoHead: React.FC = () => {
   return (
     <TodoHeadBlock>
       <h1>TodoList</h1>
       <TodoAddButton />
     </TodoHeadBlock>
   );
-}
+};
 
 export default TodoHead;
