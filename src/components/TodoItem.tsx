@@ -77,8 +77,17 @@ const TodoItem: React.FC<TodoItemProps> = props => {
 
   const refTitle = useRef<HTMLInputElement>(null);
   const [editMode, setEditMode] = useState(false);
-  const setEditOn = () => setEditMode(true);
-  const setEditOff = () => setEditMode(false);
+
+  useClickOutside(refTitle, () => {
+    setEditMode(false);
+  });
+
+  const clickTitle = () => {
+    if (!editMode) {
+      setEditMode(true);
+      (refTitle as any).current.select(); // syntax sugar
+    }
+  };
   const setTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = event.target.value;
     todolist.changeItem(data.id, {
@@ -86,22 +95,15 @@ const TodoItem: React.FC<TodoItemProps> = props => {
       title: newTitle,
     });
   };
-  const clickTitle = () => {
-    if (!editMode) {
-      setEditOn();
-      // TODO: syntax sugar?
-      (refTitle as any).current.select();
-    }
-  };
   const toggleDone = () => {
     todolist.changeItem(data.id, {
       ...data,
       done: !data.done,
     });
   };
-  const removeThis = () => todolist.removeItem(data.id);
-
-  useClickOutside(refTitle, setEditOff);
+  const removeThis = () => {
+    todolist.removeItem(data.id);
+  };
 
   return useObserver(() => (
     <TodoItemWrapper highlight={editMode}>

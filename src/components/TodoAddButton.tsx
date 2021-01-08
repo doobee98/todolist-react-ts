@@ -17,9 +17,13 @@ const TodoAddButtonWrapper = styled.div`
 const TodoAddButton: React.FC = () => {
   const { todolist } = useStore();
 
+  const addDefaultTodo = () => {
+    todolist.addDefaultItem();
+  };
+
   return (
     <TodoAddButtonWrapper>
-      <MdAdd size="40px" onClick={() => todolist.addDefaultItem()} />
+      <MdAdd size="40px" onClick={addDefaultTodo} />
     </TodoAddButtonWrapper>
   );
 };

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useObserver } from 'mobx-react';
-import TodoItem from './TodoItem';
 import useStore from '../stores/useStore';
+import TodoItem from './TodoItem';
 
 const TodoListWrapper = styled.div`
   flex: 1;
