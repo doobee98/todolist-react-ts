@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 import { useObserver } from 'mobx-react';
 import { MdDone, MdDelete } from 'react-icons/md';
 import ColorUtils from '../utils/ColorUtils';
-import TodoItemData from '../model/TodoItemData';
-import useStore from '../stores/useStore';
+import TodoItemData from '../models/TodoItemData';
+import useStore from '../utils/useStore';
 import useClickOutside from '../hooks/useClickOutside';
 
 const TodoItemWrapper = styled.div<{ highlight: boolean }>`

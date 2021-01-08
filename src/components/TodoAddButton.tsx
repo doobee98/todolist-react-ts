@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MdAdd } from 'react-icons/md';
-import useStore from '../stores/useStore';
+import useStore from '../utils/useStore';
 
 const TodoAddButtonWrapper = styled.div`
   display: flex;
