@@ -31,7 +31,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <GlobalStyle />
       <Switch>
-        <Route component={MainPage} path="/" exact />
+        <Route component={MainPage} path="/todolist-react-ts" exact />
       </Switch>
     </BrowserRouter>
   );
