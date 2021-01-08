@@ -2,32 +2,26 @@ import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useObserver } from 'mobx-react';
 import { MdDone, MdDelete } from 'react-icons/md';
-import ColorPalette from '../common/ColorPalette';
-import TodoItemData from '../model/TodoItemData';
-import useStore from '../stores/useStore';
+import ColorUtils from '../utils/ColorUtils';
+import TodoItemData from '../models/TodoItemData';
+import useStore from '../utils/useStore';
 import useClickOutside from '../hooks/useClickOutside';
 
-const { todolist } = useStore();
-
-type TodoItemProps = {
-  data: TodoItemData;
-};
-
-const TodoItemBlock = styled.div<{ highlight: boolean }>`
+const TodoItemWrapper = styled.div<{ highlight: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid ${ColorPalette.GREY};
+  border-bottom: 1px solid ${ColorUtils.GREY};
   padding: 20px 10px;
 
   &:nth-child(1) {
-    border-top: 1px solid ${ColorPalette.GREY};
+    border-top: 1px solid ${ColorUtils.GREY};
   }
 
   ${props =>
     props.highlight &&
     css`
-      background-color: ${ColorPalette.LIGHTGREY};
+      background-color: ${ColorUtils.LIGHTGREY};
     `}
 `;
 
@@ -38,9 +32,9 @@ const CheckBox = styled.div`
 
   width: 17px;
   height: 17px;
-  border: 1px solid ${ColorPalette.BLACK};
-  color: ${ColorPalette.BLACK};
-  background-color: ${ColorPalette.WHITE};
+  border: 1px solid ${ColorUtils.BLACK};
+  color: ${ColorUtils.BLACK};
+  background-color: ${ColorUtils.WHITE};
   cursor: pointer;
   font-size: 20px;
 `;
@@ -50,7 +44,7 @@ const Title = styled.input<{ checked: boolean }>`
   flex: 1;
   font-size: 15px;
   font-weight: bold;
-  color: ${ColorPalette.BLACK};
+  color: ${ColorUtils.BLACK};
   padding: 10px 8px;
 
   &:read-only {
@@ -73,11 +67,27 @@ const RemoveButton = styled.div`
   cursor: pointer;
 `;
 
-function TodoItem({ data }: TodoItemProps): JSX.Element {
+interface TodoItemProps {
+  data: TodoItemData;
+}
+
+const TodoItem: React.FC<TodoItemProps> = props => {
+  const { data } = props;
+  const { todolist } = useStore();
+
   const refTitle = useRef<HTMLInputElement>(null);
   const [editMode, setEditMode] = useState(false);
-  const setEditOn = () => setEditMode(true);
-  const setEditOff = () => setEditMode(false);
+
+  useClickOutside(refTitle, () => {
+    setEditMode(false);
+  });
+
+  const clickTitle = () => {
+    if (!editMode) {
+      setEditMode(true);
+      (refTitle as any).current.select(); // syntax sugar
+    }
+  };
   const setTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = event.target.value;
     todolist.changeItem(data.id, {
@@ -85,43 +95,34 @@ function TodoItem({ data }: TodoItemProps): JSX.Element {
       title: newTitle,
     });
   };
-  const clickTitle = () => {
-    if (!editMode) {
-      setEditOn();
-      // TODO: syntax sugar?
-      (refTitle as any).current.select();
-    }
-  };
   const toggleDone = () => {
     todolist.changeItem(data.id, {
       ...data,
       done: !data.done,
     });
   };
-  const removeThis = () => todolist.removeItem(data.id);
-
-  useClickOutside(refTitle, setEditOff);
+  const removeThis = () => {
+    todolist.removeItem(data.id);
+  };
 
   return useObserver(() => (
-    <>
-      <TodoItemBlock highlight={editMode}>
-        <CheckBox onClick={toggleDone}>
-          {data.done && <MdDone size="15px" />}
-        </CheckBox>
-        <Title
-          ref={refTitle}
-          value={data.title}
-          checked={data.done}
-          readOnly={!editMode}
-          onClick={clickTitle}
-          onChange={setTitle}
-        />
-        <RemoveButton>
-          <MdDelete onClick={removeThis} />
-        </RemoveButton>
-      </TodoItemBlock>
-    </>
+    <TodoItemWrapper highlight={editMode}>
+      <CheckBox onClick={toggleDone}>
+        {data.done && <MdDone size="15px" />}
+      </CheckBox>
+      <Title
+        ref={refTitle}
+        value={data.title}
+        checked={data.done}
+        readOnly={!editMode}
+        onClick={clickTitle}
+        onChange={setTitle}
+      />
+      <RemoveButton>
+        <MdDelete onClick={removeThis} />
+      </RemoveButton>
+    </TodoItemWrapper>
   ));
-}
+};
 
 export default TodoItem;

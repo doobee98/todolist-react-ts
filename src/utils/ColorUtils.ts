@@ -1,4 +1,4 @@
-enum ColorPalette {
+enum ColorUtils {
   BLACK = '#000000',
   WHITE = '#ffffff',
   BLUE = '#0000ff',
@@ -7,4 +7,4 @@ enum ColorPalette {
   GREY = '#808080',
 }
 
-export default ColorPalette;
+export default ColorUtils;

@@ -1,24 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import ColorPalette from '../common/ColorPalette';
+import ColorUtils from '../utils/ColorUtils';
 import TodoAddButton from './TodoAddButton';
 
-const TodoHeadBlock = styled.div`
+const TodoHeadWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   padding: 10px;
-  border-bottom: ${ColorPalette.LIGHTGREY};
+  border-bottom: ${ColorUtils.LIGHTGREY};
 `;
 
-function TodoHead(): JSX.Element {
+const TodoHead: React.FC = () => {
   return (
-    <TodoHeadBlock>
+    <TodoHeadWrapper>
       <h1>TodoList</h1>
       <TodoAddButton />
-    </TodoHeadBlock>
+    </TodoHeadWrapper>
   );
-}
+};
 
 export default TodoHead;
